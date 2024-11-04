@@ -31,9 +31,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""fe7de953-041a-4e87-9950-a306927480d3"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
@@ -87,7 +87,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""name"": ""Keyboard/gamepad Basic Movement"",
                     ""id"": ""37728131-0864-4d58-980b-86fa355bc98e"",
                     ""path"": ""2DVector"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Movement"",

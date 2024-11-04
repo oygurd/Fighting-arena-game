@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using UnityEngine.Rendering;
+using Unity.Entities;
 public class HeavyInputScript : MonoBehaviour
 {
     //Input system stuff
@@ -10,7 +11,7 @@ public class HeavyInputScript : MonoBehaviour
     PlayerActions playerActions;
     public InputActionReference move;
 
-    Vector3 forceDirection = Vector3.zero;
+    Vector3 forceDirection;
     //player stuff
     Rigidbody rb;
     Collider playerCollider;
@@ -18,7 +19,7 @@ public class HeavyInputScript : MonoBehaviour
     [Header("Camera Properties")]
     [SerializeField] Camera playerCamera;
     [SerializeField] GameObject cameraLookAtEmpty;
-    Vector2 playerCamRot;
+    Vector3 camForceDirection;
 
     //public parameters
     [Header("Speed properties")]
@@ -53,12 +54,13 @@ public class HeavyInputScript : MonoBehaviour
     {
         playerCamera = GetComponentInChildren<Camera>();
         //Vector3 playerCamPivot = 
+        //playerCamRot = GameObject.FindWithTag("PlayerToCamRotator");
         cameraLookAtEmpty = GameObject.FindWithTag("PlayerToCamRotator");
 
         canDash = true;
         rb = GetComponent<Rigidbody>();
 
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         playerInput = GetComponent<PlayerInput>(); // reference the player input on the character
@@ -73,24 +75,34 @@ public class HeavyInputScript : MonoBehaviour
         //drag
         rb.linearDamping = 2f;
 
-
-
         //movement
 
+        Vector2 Movedirection = move.action.ReadValue<Vector2>();
+
+        Vector3 camForward = playerCamera.transform.forward;
+        Vector3 camRight = playerCamera.transform.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+        camForceDirection = camForward;
 
 
-        Vector2 Movedirection = move.action.ReadValue<Vector2>().normalized;
-        forceDirection = new Vector3(Movedirection.x, 0, Movedirection.y);
-        // transform.Rotate(transform.localRotation.x, forceDirection.y, transform.localRotation.z);
-        //rb.AddForce(forceDirection * speed, ForceMode.Acceleration);
-        rb.AddForce(new Vector3(forceDirection.x, 0, forceDirection.z) * speed, ForceMode.Acceleration);
+        Vector3 correctDirectionX = Movedirection.x * transform.right;
+        Vector3 correctDirectionZ = Movedirection.y * transform.forward;
+
+
+
+        //forceDirection = new Vector3(Movedirection.x, rb.position.y, Movedirection.y);
+        forceDirection = correctDirectionX + correctDirectionZ;
+        rb.AddForce(forceDirection * speed, ForceMode.Acceleration);
+        //transform.localRotation = Quaternion.LookRotation(Movedirection, Vector3.up);
+        
+
 
         if (move.action.ReadValue<Vector2>().y > 0.1f)
         {
-            transform.Rotate(new Vector3(0, playerCamRot.y, 0) * Time.deltaTime * 10);
-            
-
-            transform.rotation = Quaternion.Euler(transform.localEulerAngles.x, playerCamera.transform.rotation.y, transform.localEulerAngles.z);
+            transform.localRotation = Quaternion.LookRotation(camForward * Time.smoothDeltaTime, Vector3.up);
+            rb.AddForce(camForceDirection , ForceMode.Acceleration);
 
         }
 
@@ -122,8 +134,8 @@ public class HeavyInputScript : MonoBehaviour
 
     public void OnCamera(InputValue cameraValue)
     {
-        playerCamRot = cameraValue.Get<Vector2>();
-        
+        // playerCamRot = cameraValue.Get<Vector2>();
+
     }
 
     IEnumerator DashCDHandler()
@@ -139,7 +151,12 @@ public class HeavyInputScript : MonoBehaviour
         //call physics inputs
         OnMovement();
 
+        cameraLookAtEmpty.transform.position = transform.position;
+
         cameraLookAtEmpty.transform.rotation = Quaternion.Euler(cameraLookAtEmpty.transform.localEulerAngles.x, playerCamera.transform.localEulerAngles.y, cameraLookAtEmpty.transform.localEulerAngles.z);
+
+
+
     }
 
 
