@@ -9,7 +9,7 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "fe7de953-041a-4e87-9950-a306927480d3",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "WOnly",
+                    "type": "Value",
+                    "id": "069460fa-cf60-4df9-9685-660221c2e96e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -73,8 +82,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "710d8d39-5cd5-45be-b8bc-7dde7f7000ab",
+                    "name": "Up",
+                    "id": "d1e44a96-d8e6-41e8-b664-268226da3f87",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -85,7 +94,7 @@
                 },
                 {
                     "name": "down",
-                    "id": "d1e44a96-d8e6-41e8-b664-268226da3f87",
+                    "id": "ac06798a-e5b7-4638-aba9-ca6a31cfd816",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -247,6 +256,17 @@
                     "action": "W+ Left click",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "fb15e4e0-a02c-4d0e-b70a-ceb20e5aca06",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WOnly",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

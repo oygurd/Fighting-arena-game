@@ -31,7 +31,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""fe7de953-041a-4e87-9950-a306927480d3"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -80,6 +80,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WOnly"",
+                    ""type"": ""Value"",
+                    ""id"": ""069460fa-cf60-4df9-9685-660221c2e96e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -95,8 +104,8 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""710d8d39-5cd5-45be-b8bc-7dde7f7000ab"",
+                    ""name"": ""Up"",
+                    ""id"": ""d1e44a96-d8e6-41e8-b664-268226da3f87"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -107,7 +116,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""d1e44a96-d8e6-41e8-b664-268226da3f87"",
+                    ""id"": ""ac06798a-e5b7-4638-aba9-ca6a31cfd816"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -269,6 +278,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""W+ Left click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb15e4e0-a02c-4d0e-b70a-ceb20e5aca06"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WOnly"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -283,6 +303,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_HeavyCharacterInputs_Camera = m_HeavyCharacterInputs.FindAction("Camera", throwIfNotFound: true);
         m_HeavyCharacterInputs_Dash = m_HeavyCharacterInputs.FindAction("Dash", throwIfNotFound: true);
         m_HeavyCharacterInputs_WLeftclick = m_HeavyCharacterInputs.FindAction("W+ Left click", throwIfNotFound: true);
+        m_HeavyCharacterInputs_WOnly = m_HeavyCharacterInputs.FindAction("WOnly", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -355,6 +376,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_HeavyCharacterInputs_Camera;
     private readonly InputAction m_HeavyCharacterInputs_Dash;
     private readonly InputAction m_HeavyCharacterInputs_WLeftclick;
+    private readonly InputAction m_HeavyCharacterInputs_WOnly;
     public struct HeavyCharacterInputsActions
     {
         private @PlayerActions m_Wrapper;
@@ -365,6 +387,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         public InputAction @Camera => m_Wrapper.m_HeavyCharacterInputs_Camera;
         public InputAction @Dash => m_Wrapper.m_HeavyCharacterInputs_Dash;
         public InputAction @WLeftclick => m_Wrapper.m_HeavyCharacterInputs_WLeftclick;
+        public InputAction @WOnly => m_Wrapper.m_HeavyCharacterInputs_WOnly;
         public InputActionMap Get() { return m_Wrapper.m_HeavyCharacterInputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -392,6 +415,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @WLeftclick.started += instance.OnWLeftclick;
             @WLeftclick.performed += instance.OnWLeftclick;
             @WLeftclick.canceled += instance.OnWLeftclick;
+            @WOnly.started += instance.OnWOnly;
+            @WOnly.performed += instance.OnWOnly;
+            @WOnly.canceled += instance.OnWOnly;
         }
 
         private void UnregisterCallbacks(IHeavyCharacterInputsActions instance)
@@ -414,6 +440,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @WLeftclick.started -= instance.OnWLeftclick;
             @WLeftclick.performed -= instance.OnWLeftclick;
             @WLeftclick.canceled -= instance.OnWLeftclick;
+            @WOnly.started -= instance.OnWOnly;
+            @WOnly.performed -= instance.OnWOnly;
+            @WOnly.canceled -= instance.OnWOnly;
         }
 
         public void RemoveCallbacks(IHeavyCharacterInputsActions instance)
@@ -439,5 +468,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnWLeftclick(InputAction.CallbackContext context);
+        void OnWOnly(InputAction.CallbackContext context);
     }
 }
