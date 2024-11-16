@@ -8,8 +8,10 @@ using Cinemachine.Utility;
 using System.Linq;
 using Unity.Mathematics;
 using Unity.Core;
-public class HeavyInputScript : MonoBehaviour// , IInputInteraction
+public class HeavyInputScript : MonoBehaviour
 {
+    [SerializeField] AnimationsHandler animationsHandler;
+
     //Input system stuff
     PlayerInput playerInput;
     PlayerActions playerActions;
@@ -65,11 +67,6 @@ public class HeavyInputScript : MonoBehaviour// , IInputInteraction
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //playerInputAction.started += OnMovement;
-
-        //playerCamera = GetComponentInChildren<Camera>();
-        //Vector3 playerCamPivot = 
-        //playerCamRot = GameObject.FindWithTag("PlayerToCamRotator");
         cameraLookAtEmpty = GameObject.FindWithTag("PlayerToCamRotator");
 
         canDash = true;
@@ -103,8 +100,9 @@ public class HeavyInputScript : MonoBehaviour// , IInputInteraction
 
 
         //movement
-        Vector2 Movedirection = move.action.ReadValue<Vector2>();
+        Movedirection = move.action.ReadValue<Vector2>();
 
+        // Movedirection.y = 0;
         //Movedirection.y = Mathf.Min(Movedirection.y, 0);
 
         camForward = playerCamera.transform.forward;
@@ -120,53 +118,37 @@ public class HeavyInputScript : MonoBehaviour// , IInputInteraction
         forceDirection = correctDirectionX + correctDirectionZ;
 
 
-        /* Vector3 sidesForward = new Vector3(Movedirection.x, transform.forward.y, Movedirection.y);
-         if (move.action.IsPressed())
-         {
-             // transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(forceDirection, Vector3.up), 0.1f);
-             transform.rotation = Quaternion.LookRotation(sidesForward * Time.fixedDeltaTime, Vector3.up);
-
-         }*/
 
         rb.AddForce(forceDirection * speed, ForceMode.Acceleration);
 
-        //cameraLookAtEmpty.transform.rotation = Quaternion.LookRotation(camForward, Vector3.up);
 
-        // camRotation = quaternion.Euler(camForward * Time.fixedDeltaTime * 20);
-        //camRotation = cameraLookAtEmpty.transform.rotation;
-
-        /*if (move.action.ReadValue<Vector2>().y > 0.1f)
+        if(Movedirection.y == 0 && Movedirection.x == 0)
         {
+            animationsHandler.Idle();
+        }
 
-            // rb.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForward, Vector3.up), 20f * Time.fixedDeltaTime);
-
-            // transform.localRotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForward, Vector3.up), 0.1f);
-            //transform.rotation = cameraLookAtEmpty.transform.rotation;
-
-            rb.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForward, Vector3.up), 1);
-            rb.AddForce(camForceDirection * Time.deltaTime, ForceMode.Acceleration);
-        }*/
-
-        /*if (move.action.ReadValue<Vector2>().y > 0.1f)
+        if (Movedirection.y > 0.1f)
         {
-            transform.localRotation = Quaternion.LookRotation(camForward * Time.smoothDeltaTime, Vector3.up);
-            rb.AddForce(camForceDirection , ForceMode.Acceleration);
-        }*/
+            animationsHandler.ForwardWalk();
+        }
+
+
+
 
     }
 
     public void OnWOnly()
     {
-        if (move.action.ReadValue<Vector2>().y > 0.1f)
+        if (Movedirection.y > 0.1f)
         {
 
             //rb.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForward, Vector3.up), 20f * Time.fixedDeltaTime);
 
-            rb.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForward * Time.fixedUnscaledDeltaTime * 15, Vector3.up), 0.1f  );
+            rb.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForward * Time.fixedUnscaledDeltaTime * 15, Vector3.up), 0.1f);
             //transform.rotation = cameraLookAtEmpty.transform.rotation;
 
             //rb.rotation = Quaternion.Slerp(rb.rotation,camForward, 1f);
-           // rb.MoveRotation(Quaternion.LookRotation(camForward * Time.deltaTime, Vector3.up));
+            // rb.MoveRotation(Quaternion.LookRotation(camForward * Time.deltaTime, Vector3.up));
             // rb.MoveRotation(Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForward, Vector3.up), 20 * Time.fixedDeltaTime));
             //rb.AddForce(camForceDirection * Time.deltaTime, ForceMode.Acceleration);
         }
