@@ -8,6 +8,7 @@ using Cinemachine.Utility;
 using System.Linq;
 using Unity.Mathematics;
 using Unity.Core;
+using UnityEngine.EventSystems;
 public class HeavyInputScript : MonoBehaviour
 {
     [SerializeField] AnimationsHandler animationsHandler;
@@ -20,8 +21,9 @@ public class HeavyInputScript : MonoBehaviour
 
     Vector3 camForward;
     quaternion camRotation;
-
-
+    Vector3 correctDirectionX;
+    Vector3 correctDirectionZ;
+    Vector3 cameraAndForce;
     Vector3 forceDirection;
     //player stuff
     Rigidbody rb;
@@ -39,6 +41,8 @@ public class HeavyInputScript : MonoBehaviour
     //public parameters
     [Header("Speed properties")]
     [SerializeField] float speed;
+    [SerializeField] float playerMagnitude;
+
 
     [Header("Jump properties")]
     [SerializeField] float jumpForce;
@@ -73,10 +77,11 @@ public class HeavyInputScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;//| RigidbodyConstraints.FreezeRotationY;
-
+        rb.maxLinearVelocity = 7;
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         playerInput = GetComponent<PlayerInput>(); // reference the player input on the character
         playerActions = GetComponent<PlayerActions>();
+        playerMagnitude = rb.linearVelocity.magnitude;
 
     }
 
@@ -110,57 +115,50 @@ public class HeavyInputScript : MonoBehaviour
 
         camForward.y = 0;
         camRight.y = 0;
-        camForceDirection = camForward;
 
-        Vector3 correctDirectionX = Movedirection.x * transform.right;
-        Vector3 correctDirectionZ = Movedirection.y * transform.forward;
+        Vector3 camForwardRelative = camForward * Movedirection.y;
+        Vector3 camRightRelative = camRight * Movedirection.x;
+
+        Vector3 rotDir = camForwardRelative + camRightRelative;
+
+        camForceDirection = camForward + camRight;
+
+        correctDirectionX = Movedirection.x * transform.right;
+        correctDirectionZ = Movedirection.y * transform.forward;
 
         forceDirection = correctDirectionX + correctDirectionZ;
 
 
+        rb.AddForce(rotDir * speed, ForceMode.Acceleration);
 
-        rb.AddForce(forceDirection * speed, ForceMode.Acceleration);
 
-
-        if(Movedirection.y == 0 && Movedirection.x == 0)
+        if (move.action.IsPressed())
+        {
+            rb.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotDir * Time.fixedUnscaledDeltaTime * 15, Vector3.up), 0.5f);
+            animationsHandler.ForwardWalk();
+        }    
+        else
         {
             animationsHandler.Idle();
         }
-
-        if (Movedirection.y > 0.1f)
-        {
-            animationsHandler.ForwardWalk();
-        }
-
-
-
 
     }
 
     public void OnWOnly()
     {
-        if (Movedirection.y > 0.1f)
-        {
 
-            //rb.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForward, Vector3.up), 20f * Time.fixedDeltaTime);
-
-            rb.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForward * Time.fixedUnscaledDeltaTime * 15, Vector3.up), 0.1f);
-            //transform.rotation = cameraLookAtEmpty.transform.rotation;
-
-            //rb.rotation = Quaternion.Slerp(rb.rotation,camForward, 1f);
-            // rb.MoveRotation(Quaternion.LookRotation(camForward * Time.deltaTime, Vector3.up));
-            // rb.MoveRotation(Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForward, Vector3.up), 20 * Time.fixedDeltaTime));
-            //rb.AddForce(camForceDirection * Time.deltaTime, ForceMode.Acceleration);
-        }
     }
-
-
 
     public void OnJump(InputValue jumpValue)
     {
         if (isGrounded && jumpValue.isPressed)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            animationsHandler.Jump();
+        }
+        else
+        {
+            animationsHandler.Idle();
         }
     }
 
@@ -210,6 +208,7 @@ public class HeavyInputScript : MonoBehaviour
         OnMovement();
         OnWOnly();
 
+        playerMagnitude = rb.linearVelocity.magnitude;
 
         cameraLookAtEmpty.transform.position = transform.position;
 

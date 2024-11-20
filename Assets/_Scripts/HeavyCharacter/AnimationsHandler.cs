@@ -15,41 +15,48 @@ public class AnimationsHandler : MonoBehaviour
     //Movement animations
     public void Idle()
     {
-        HeavyAnimator.SetBool("ForwardWalk", false);
+        HeavyAnimator.SetBool("Idle", true);
         HeavyAnimator.SetBool("BackWalk", false);
-        HeavyAnimator.SetBool("isIdle", true);
+        HeavyAnimator.SetBool("ForwardWalk", false);
     }
 
     public void Jump()
     {
-        HeavyAnimator.SetBool("Jump", true);
-        HeavyAnimator.SetBool("isIdle", false);
+        HeavyAnimator.SetBool("Jump",true);
+        HeavyAnimator.SetBool("Idle", false);
+
     }
 
     public void ForwardWalk()
     {
         HeavyAnimator.SetBool("ForwardWalk", true);
-        HeavyAnimator.SetBool("isIdle", false);
+        HeavyAnimator.SetBool("BackWalk", false);
+        HeavyAnimator.SetBool("Idle", false);
     }
 
     public void BackWalk()
     {
         HeavyAnimator.SetBool("BackWalk", true);
-        HeavyAnimator.SetBool("isIdle", false);
+        HeavyAnimator.SetBool("ForwardWalk", false);
+        HeavyAnimator.SetBool("Idle", false);
     }
 
     public void WalkRight()
     {
-        HeavyAnimator.SetBool("WalkRight", true);
-        HeavyAnimator.SetBool("isIdle", false);
+        HeavyAnimator.Play("WalkingRight");
     }
 
     public void WalkLeft()
     {
-        HeavyAnimator.SetBool("WalkLeft", true);
-        HeavyAnimator.SetBool("isIdle", false);
+        HeavyAnimator.Play("WalkingLeft");
     }
 
+    //attack animations
+
+   public void Jab()
+    {
+        HeavyAnimator.SetBool("Jab",true);
+    }
 
 
 

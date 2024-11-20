@@ -1,0 +1,177 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Heavy_Avatar_Mask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/armpole.L
+    m_Weight: 1
+  - m_Path: Armature/armpole.L/armpole.L_end
+    m_Weight: 1
+  - m_Path: Armature/armpole.R
+    m_Weight: 1
+  - m_Path: Armature/armpole.R/armpole.R_end
+    m_Weight: 1
+  - m_Path: Armature/heelliftcopyrot
+    m_Weight: 1
+  - m_Path: Armature/heelliftcopyrot/heelliftcopyrot_end
+    m_Weight: 1
+  - m_Path: Armature/legpole.L
+    m_Weight: 1
+  - m_Path: Armature/legpole.L/legpole.L_end
+    m_Weight: 1
+  - m_Path: Armature/legpole.R
+    m_Weight: 1
+  - m_Path: Armature/legpole.R/legpole.R_end
+    m_Weight: 1
+  - m_Path: Armature/root
+    m_Weight: 1
+  - m_Path: Armature/root/body
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/heeladapt.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/heeladapt.L/heeladapt.L_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/heeladapt.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/heeladapt.R/heeladapt.R_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/legstretch.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/legstretch.L/legstretch.L_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/legstretch.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/legstretch.R/legstretch.R_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/spineheadtrack
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/spineheadtrack/spinebbone
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/spineheadtrack/spinebbone/spinebbone_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/spineheadtrack/spinehead
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/spineheadtrack/spinehead/spinehead_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/spinepushpullchild1
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/spinepushpullchild1/spinepushpullchild1_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/thigh.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/thigh.L/shin.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/thigh.L/shin.L/foot.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/thigh.L/shin.L/foot.L/toes.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/thigh.L/shin.L/foot.L/toes.L/toes.L_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/thigh.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/thigh.R/shin.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/thigh.R/shin.R/foot.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/thigh.R/shin.R/foot.R/toes.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/pelvis/thigh.R/shin.R/foot.R/toes.R/toes.R_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinepushpullchild2
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinepushpullchild2/spinepushpullchild2_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.L/armstretch.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.L/armstretch.L/armstretch.L_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.L/upperarm.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.L/upperarm.L/lowerarm.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.L/upperarm.L/lowerarm.L/hand.L
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.L/upperarm.L/lowerarm.L/hand.L/hand.L_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.R/armstretch.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.R/armstretch.R/armstretch.R_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.R/upperarm.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.R/upperarm.R/lowerarm.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.R/upperarm.R/lowerarm.R/hand.R
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/clavicle.R/upperarm.R/lowerarm.R/hand.R/hand.R_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/neck
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/neck/head
+    m_Weight: 1
+  - m_Path: Armature/root/body/spine1/spine2/spinetail/neck/head/head_end
+    m_Weight: 1
+  - m_Path: Armature/root/body/torsocontroller
+    m_Weight: 1
+  - m_Path: Armature/root/body/torsocontroller/spinepushpullcontroller
+    m_Weight: 1
+  - m_Path: Armature/root/body/torsocontroller/spinepushpullcontroller/spinepushpullcontroller_end
+    m_Weight: 1
+  - m_Path: Armature/root/footcontroller.L
+    m_Weight: 1
+  - m_Path: Armature/root/footcontroller.L/footlift.L
+    m_Weight: 1
+  - m_Path: Armature/root/footcontroller.L/footlift.L/iktarget2.L
+    m_Weight: 1
+  - m_Path: Armature/root/footcontroller.L/footlift.L/iktarget2.L/iktarget2.L_end
+    m_Weight: 1
+  - m_Path: Armature/root/footcontroller.R
+    m_Weight: 1
+  - m_Path: Armature/root/footcontroller.R/footlift.R
+    m_Weight: 1
+  - m_Path: Armature/root/footcontroller.R/footlift.R/iktarget2.R
+    m_Weight: 1
+  - m_Path: Armature/root/footcontroller.R/footlift.R/iktarget2.R/iktarget2.R_end
+    m_Weight: 1
+  - m_Path: Armature/root/iktarget.L
+    m_Weight: 1
+  - m_Path: Armature/root/iktarget.L/iktarget.L_end
+    m_Weight: 1
+  - m_Path: Armature/root/iktarget.R
+    m_Weight: 1
+  - m_Path: Armature/root/iktarget.R/iktarget.R_end
+    m_Weight: 1
+  - m_Path: Armature/root/lookat
+    m_Weight: 1
+  - m_Path: Armature/root/lookat/lookatbone
+    m_Weight: 1
+  - m_Path: Armature/root/lookat/lookatbone/lookatbone_end
+    m_Weight: 1
+  - m_Path: Empty
+    m_Weight: 1
+  - m_Path: Mesh
+    m_Weight: 1
+  - m_Path: View_Camera.001
+    m_Weight: 1
